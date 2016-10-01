@@ -2,13 +2,20 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Task } from './index';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
 export class TaskService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private endpointUrl = 'http://homestead.com/api/tasks';
+    private token: string;
 
     public constructor(private http: Http) {
+        this.token = Cookie.get('token');
+        this.token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.YbksTJf74BPWCX5ESGxyLrGsyP52_xZWAup1_twrYko';
+        if (this.token) {
+            this.headers.append('Authorization', `Bearer ${this.token}`);
+        }
     }
 
     public all(): Observable<Task[]> {

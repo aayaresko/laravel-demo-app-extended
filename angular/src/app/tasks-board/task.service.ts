@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Task } from './index';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class TaskService {
     public constructor(private http: Http) {
     }
 
-    public all() {
+    public all(): Observable<Task[]> {
         return this.http
             .get(this.endpointUrl, { headers: this.headers })
             .map((response: Response) => response.json())
@@ -26,19 +26,19 @@ export class TaskService {
          * */
     }
 
-    public show(id: number) {
+    public show(id: number): Observable<Task> {
         return this.all()
             .map((tasks) => tasks.find((task) => task.id === id));
     }
 
-    public store(task: Task) {
+    public store(task: Task): Observable<Task> {
         return this.http
             .post(this.endpointUrl, JSON.stringify(task), { headers: this.headers })
             .map((response) => response.json())
             .catch(this.handleError);
     }
 
-    public update(task: Task) {
+    public update(task: Task): Observable<Task> {
         let url = `${this.endpointUrl}/${task.id}`;
         return this.http
             .put(url, JSON.stringify(task), { headers: this.headers })

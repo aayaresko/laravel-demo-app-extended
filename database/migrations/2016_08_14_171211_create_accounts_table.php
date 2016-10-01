@@ -18,9 +18,10 @@ class CreateAccountsTable extends Migration
             $table->string('email')->nullable(false);
             $table->string('password')->nullable(true);
             $table->string('registration_token')->nullable(true);
-            $table->unique(['email', 'nickname']);
+            $table->string('api_token')->nullable(true);
             $table->rememberToken();
             $table->tinyInteger('status')->nullable(true);
+            $table->unique(['email', 'nickname']);
             $table->timestamps();
         });
     }

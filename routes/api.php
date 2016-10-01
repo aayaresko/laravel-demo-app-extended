@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,19 +11,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
+/*Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:api');
+})->middleware('auth:api');*/
 
 // ['cors', 'auth:api']
+
 Route::group(['namespace' => 'REST', 'middleware' => 'cors'], function () {
+    Route::get('account', 'AccountController@identify');
     Route::resource('tasks', 'TaskController');
-    Route::options('tasks', function (Request $request) {
-        $headers = [
-            'Access-Control-Allow-Headers' => 'access-control-request-methods, access-control-request-origin, content-type',
-            'Access-Control-Allow-Origin' => '*',
-            'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS'
-        ];
-        return response('OK', 200, $headers);
-    });
+    Route::options('{any}', function() {
+        return response('', 200);
+    })->where('{any}', '[a-zA-Z0-9_\-\/]+');
 });

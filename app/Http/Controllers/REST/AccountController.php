@@ -7,7 +7,9 @@ namespace App\Http\Controllers\REST;
 
 use App\Http\Controllers\Controller;
 use App\Models\Entities\Account;
+use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
+use Psy\Util\Json;
 
 class AccountController extends Controller
 {
@@ -86,5 +88,15 @@ class AccountController extends Controller
     public function destroy($id)
     {
         return response('', 501);
+    }
+
+    public function identify(Request $request)
+    {
+        $parts = explode(' ', $request->header('Authorization'));
+        $payload = JWT::decode(next($parts), env('JWT_SECRET', 'none'), ['HS256']);
+        if ($payload->id) {
+            return response()->json(Account::find($payload->id));
+        }
+        return response('', 404);
     }
 }

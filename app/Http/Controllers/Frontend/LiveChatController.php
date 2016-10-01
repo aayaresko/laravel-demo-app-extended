@@ -22,6 +22,8 @@ class LiveChatController extends Controller
     {
         $account = Auth::user();
         $token = JWT::encode(['id' => $account->id], env('JWT_SECRET', 'none'));
+        $account->api_token = $token;
+        $account->save();
         Cookie::queue('token', $token, null, null, null, false, false);
 
         $messages = ChatMessage::all();

@@ -40,6 +40,7 @@ class Account extends User
      */
     protected $hidden = [
         'password',
+        'api_token',
         'remember_token',
         'registration_token',
         'updated_at'

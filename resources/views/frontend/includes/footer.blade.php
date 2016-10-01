@@ -1,0 +1,1 @@
+<p class="pull-left">&copy; {{ config('app.name') }} {{ date('Y') }}</p>

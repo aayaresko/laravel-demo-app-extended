@@ -1,8 +1,9 @@
-import { Component, OnInit, trigger, style, transition, animate } from '@angular/core';
+import { Component, OnInit, trigger, style, transition, animate, OnDestroy } from '@angular/core';
 import { User } from '../shared/index';
+import { Message } from './index';
 import { SocketService } from '../shared/socket.service';
-import { LiveChatService } from './live-chat.service';
 import { MessageService } from './message.service';
+import { UserService } from '../shared/user.service';
 
 @Component({
     selector: 'app-live-chat',
@@ -23,25 +24,55 @@ import { MessageService } from './message.service';
             transition('* => void', style({ opacity: 0 }))
         ])
     ],
-    providers: [SocketService, MessageService, LiveChatService]
+    providers: [
+        SocketService,
+        MessageService,
+        UserService
+    ]
 })
-export class LiveChatComponent implements OnInit {
+export class LiveChatComponent implements OnInit, OnDestroy {
     private user: User = null;
-    private connectionStatus = 'disconnected';
+    public connectionStatus = 'disconnected';
 
-    public constructor(private chatService: LiveChatService) {
+    public constructor(private socketService: SocketService, private messageService: MessageService, private userService: UserService) {
     }
 
     public ngOnInit() {
-        this.chatService.authenticatedUser.subscribe((user) => {
-            this.user = user;
-        });
-        this.chatService.connectionStatus.subscribe((status) => {
+        this.socketService.configure();
+        this.socketService.asObservable().subscribe(
+            (item) => this.process(item),
+            (error) => console.log(error)
+        );
+        this.socketService.status.subscribe((status) => {
             this.connectionStatus = status;
         });
     }
 
+    public ngOnDestroy() {
+        this.socketService.status.unsubscribe();
+    }
+
     public onPersistMessage(message: any) {
-        this.chatService.persist(message);
+        this.socketService.send({ message: message });
+    }
+
+    private process(item) {
+        let action = item.action;
+        switch (action) {
+            case 'connected':
+                this.socketService.latest(this.messageService.getIndex());
+                break;
+            case 'chat-message':
+            case 'system-message':
+                let data = item.data.message;
+                let message = new Message(data.content, data.author_id, data.created_at, action, data.id);
+                this.messageService.cache(message);
+                this.userService.cache(new User(item.data));
+                break;
+            case 'user-account':
+                this.userService.cache(new User(item.data));
+                this.user = this.userService.authenticated();
+                break;
+        }
     }
 }

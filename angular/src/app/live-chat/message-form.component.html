@@ -1,0 +1,10 @@
+<form class="form-horizontal" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-11">
+            <textarea id="content" placeholder="Yor message text" class="form-control" name="content" required formControlName="content"></textarea>
+        </div>
+        <div class="col-md-1">
+            <input class="btn btn-primary" value="Send" type="submit" [disabled]="!mainForm.valid">
+        </div>
+    </div>
+</form>

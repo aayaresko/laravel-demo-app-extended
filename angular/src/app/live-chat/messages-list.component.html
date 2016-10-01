@@ -1,0 +1,5 @@
+<div class="list-group">
+    <div *ngFor="let message of messages" class="row list-group-item" @added>
+        <app-live-chat-message [message]="message"></app-live-chat-message>
+    </div>
+</div>

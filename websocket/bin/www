@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+/**
+ * Copyright (c) 2016  Andrey Yaresko.
+ * Application main script.
+ *
+ * Pulls together all application modules and runs them.
+ * Handles some configurations errors.
+ *
+ */
+const AppHelper = require( '../boot/app-helper' );
+
+const config = require( '../config' );
+const Database = require( '../boot/sequelize' );
+const database = Database.instantiate();
+
+let Loader = require( '../entities/models/index' );
+let models = new Loader( database );
+
+/**
+ * Get port from environment and store in Express
+ */
+let port = AppHelper.normalizePort( config.global.port || 8081 );
+
+/**
+ * Listening on provided port, on all network interfaces
+ */
+const Socket = require( '../boot/socket' );
+const socket = new Socket( database, port );
+socket.run();

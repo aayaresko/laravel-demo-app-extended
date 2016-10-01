@@ -1,0 +1,27 @@
+{
+  "name": "WebSocket",
+  "version": "1.0.0",
+  "description": "Basic WebSocket Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/app"
+  },
+  "author": {
+    "name": "Andrey Yaresko",
+    "email": "aayaresko@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "caminte": "^0.2.13",
+    "fs": "0.0.1-security",
+    "ini": "^1.3.4",
+    "mysql": "^2.11.1",
+    "sequelize": "^3.24.3",
+    "socketio": "^1.0.0",
+    "socketio-jwt": "^4.5.0",
+    "sugar": "^2.0.1"
+  },
+  "devDependencies": {
+    "debug": "^2.2.0"
+  }
+}

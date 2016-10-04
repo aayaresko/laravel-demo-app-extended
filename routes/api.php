@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
     return $request->user();
 })->middleware('auth:api');*/
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::get('/user', function (Request $request) {
         $account = $request->user();
         $account->profile;

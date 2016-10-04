@@ -21,8 +21,6 @@ Route::get('/index', function () {
     return view('frontend.index');
 });
 
-Route::get('test-api', 'Frontend\SiteController@testApi');
-
 Route::get('auth/github', [
     'uses' => 'Auth\GithubController@redirectToProvider',
     'as' => 'auth.github'

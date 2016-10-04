@@ -74,7 +74,6 @@ export class LiveChatComponent implements OnInit, OnDestroy {
             case 'chat-message':
             case 'system-message':
                 data = item.data.message;
-                console.log(data);
                 let message = new Message(data.content, data.author_id, data.author, data.created_at, action, data.id);
                 this.messageService.cache(message);
                 break;

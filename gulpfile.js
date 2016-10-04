@@ -22,5 +22,6 @@ elixir(mix => {
             'main.css'
         ])
         .copy('./resources/assets/vendor', 'public/vendor')
-        .copy('./angular/dist/*.js', 'public/js/angular');
+        .copy('./angular/dist/*.js', 'public/js/angular')
+        .copy('./angular/dist/*.map', 'public/js/angular');
 });

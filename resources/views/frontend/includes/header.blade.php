@@ -21,6 +21,11 @@
                     <li>
                         <a href="{{ route('frontend.catalog-product.index') }}">@lang('catalog.title')</a>
                     </li>
+                    @if (Auth::user())
+                        <li>
+                            <a href="{{ route('frontend.task.index') }}">@lang('task.title')</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ route('frontend.article.show', 'about-me') }}">@lang('content.author_about')</a>
                     </li>

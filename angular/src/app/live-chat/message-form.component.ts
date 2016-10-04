@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Message } from './index';
+import { Message } from './message';
 import { User } from '../shared/index';
 
 @Component({
@@ -8,8 +8,8 @@ import { User } from '../shared/index';
     templateUrl: './message-form.component.html',
 })
 export class MessageFormComponent implements OnInit {
-    @Input() author: User;
-    @Output() persist = new EventEmitter();
+    @Input() public author: User;
+    @Output() public persist = new EventEmitter();
     public mainForm: FormGroup;
 
     public constructor() {

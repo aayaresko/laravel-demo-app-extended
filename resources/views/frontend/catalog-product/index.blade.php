@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-8">
                     <h1>{{ $category ? $category->visible_name : trans('catalog.title') }}</h1>
-                    @if (count($models) > 0)
+                    @if (count($models))
                         <div class="row">
                             @foreach($models->chunk(3) as $set)
                                 @foreach($set as $model)
@@ -35,6 +35,15 @@
                                 @endforeach
                                 <div class="clearfix"></div>
                             @endforeach
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ $models->links() }}
+                            </div>
+                        </div>
+                    @else
+                        <div class="row">
+                            <p>@lang('content.no_models')</p>
                         </div>
                     @endif
                 </div>

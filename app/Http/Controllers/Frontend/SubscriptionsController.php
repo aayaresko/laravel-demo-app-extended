@@ -23,7 +23,7 @@ class SubscriptionsController extends Controller
             $model = $account->subscriptions;
             $model->fill($request->all());
             $model->save();
-            return redirect()->route('frontend.subscriptions.edit')->with('success', trans('models.updated', ['name' => 'Subscriptions']));
+            return redirect()->route('frontend.subscriptions.edit')->with('success', trans('models.updated'));
         }
         return redirect()->route('not-found');
     }

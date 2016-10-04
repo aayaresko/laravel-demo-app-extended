@@ -9,7 +9,7 @@
     <h1>@lang('feedback.message_update') '{{ $model->sender_name }}'</h1>
     <div class="row">
         <div class="col-md-12">
-            @include('backend.feedback-request.form', ['model' => $model])
+            @include('backend.feedback-request.form')
         </div>
     </div>
 @endsection

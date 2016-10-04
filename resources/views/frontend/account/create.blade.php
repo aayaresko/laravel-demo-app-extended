@@ -14,13 +14,13 @@
                     <div class="form-group">
                         {{ Form::label('name', trans('account.nickname_label'), ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::text('name', $model->nickname, ['placeholder' => trans('account.nickname_label'), 'class' => 'form-control']) }}
+                            {{ Form::text('name', $account->nickname, ['placeholder' => trans('account.nickname_label'), 'class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">
                         {{ Form::label('email', trans('account.email_label'), ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
-                            {{ Form::text('email', $model->email, ['placeholder' => trans('account.email_placeholder'), 'class' => 'form-control']) }}
+                            {{ Form::text('email', $account->email, ['placeholder' => trans('account.email_placeholder'), 'class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">

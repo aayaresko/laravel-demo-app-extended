@@ -9,13 +9,7 @@
     <h1>@lang('catalog.product_update') '{{ $model->visible_name }}'</h1>
     <div class="row">
         <div class="col-md-12">
-            @include('backend.catalog-product.form', [
-                'model' => $model,
-                'authors' => $authors,
-                'categories' => $categories,
-                'images' => $images,
-                'properties' => $properties
-            ])
+            @include('backend.catalog-product.form')
         </div>
     </div>
 @endsection

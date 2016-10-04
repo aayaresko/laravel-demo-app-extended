@@ -12,7 +12,9 @@
         <div class="panel-body">
             <div class="post-image">
                 @if ($model->preview_image_url)
-                    <p><img src="{{ $model->getImagePath('preview_image_url') }}" alt="{{ $model->title }}" class="img-rounded img-responsive"></p>
+                    <p>
+                        <img src="{{ $model->getImagePath('preview_image_url') }}" alt="{{ $model->title }}" class="img-rounded img-responsive">
+                    </p>
                 @endif
             </div>
             <div class="post-content">

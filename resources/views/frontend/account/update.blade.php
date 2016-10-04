@@ -9,7 +9,7 @@
     <h1>@lang('account.profile_update')</h1>
     <div class="row">
         <div class="col-md-12">
-            @include('frontend.account.form', ['model' => $model, 'profile' => $profile])
+            @include('frontend.account.form')
         </div>
     </div>
 @endsection

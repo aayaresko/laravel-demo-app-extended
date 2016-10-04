@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,12 +17,13 @@
     return $request->user();
 })->middleware('auth:api');*/
 
-// ['cors', 'auth:api']
-
-Route::group(['namespace' => 'REST', 'middleware' => 'cors'], function () {
-    Route::get('account', 'AccountController@identify');
-    Route::resource('tasks', 'TaskController');
-    Route::options('{any}', function() {
-        return response('', 200);
-    })->where('{any}', '[a-zA-Z0-9_\-\/]+');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/user', function (Request $request) {
+        $account = $request->user();
+        $account->profile;
+        return $account;
+    });
+    Route::group(['namespace' => 'REST'], function () {
+        Route::resource('tasks', 'TaskController');
+    });
 });

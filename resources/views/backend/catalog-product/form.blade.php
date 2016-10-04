@@ -5,7 +5,7 @@
 @section('scripts')
     <script type="text/javascript" src="{{ asset('vendor/select2/select2.js') }}"></script>
     <script type="text/javascript">
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function () {
             jQuery('.multiple-select').select2({
                 placeholder: '@lang('content.select_placeholder')',
                 allowClear: false

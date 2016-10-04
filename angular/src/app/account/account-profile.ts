@@ -3,7 +3,7 @@ export class AccountProfile {
                        public last_name: string,
                        public birth_date: Date,
                        public avatar_url: string,
-                       public author_id: number,
+                       public account_id: number,
                        public created_at: Date = new Date()) {
     }
 }

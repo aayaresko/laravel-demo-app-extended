@@ -11,7 +11,7 @@
 @section('content')
     <div id="messages-list">
         <app-root>
-            <div class="alert alert-info">@lang('content.live_chat_loading_title')</div>
+            <div class="alert alert-info">@lang('content.loading')</div>
         </app-root>
     </div>
     <script type="text/javascript" src="{{ asset('js/angular/inline.js') }}"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\REST;
 
+use App\Models\Entities\Account;
 use App\Models\Entities\Task;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $models = Task::with('author.profile')->orderBy('created_at', 'desc')->get();
+        $models = Task::with('author.profile')->orderBy('created_at', 'asc')->get();
         return response()->json($models);
     }
 
@@ -49,8 +50,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $model = new Task($request->all());
-        $model->save();
+        $account = $request->user();
+        /** @var $account Account */
+        $account->tasks()->create($request->all());
         return response('', 204);
     }
 

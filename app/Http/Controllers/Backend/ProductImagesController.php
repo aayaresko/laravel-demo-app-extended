@@ -44,6 +44,6 @@ class ProductImagesController extends Controller
         } else {
             $query->delete();
         }
-        return redirect()->route('backend.catalog-product-images.edit', $model->id)->with('success', trans('models.updated', ['name' => 'Catalog product images']));
+        return redirect()->route('backend.catalog-product-images.edit', $model->id)->with('success', trans('models.saved'));
     }
 }

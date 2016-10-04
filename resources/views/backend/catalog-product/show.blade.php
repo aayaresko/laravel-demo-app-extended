@@ -56,7 +56,8 @@
                         </div>
                         <div class="col-md-4">
                             <span class="text-muted pull-right">
-                                {{ $model->created }}, <a href="{{ route('backend.account.show', $model->author_id) }}">{{ $model->author->profile->full_name }}</a>
+                                {{ $model->created }}
+                                , <a href="{{ route('backend.account.show', $model->author_id) }}">{{ $model->author->profile->full_name }}</a>
                             </span>
                         </div>
                     </div>

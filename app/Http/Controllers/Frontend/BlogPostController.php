@@ -36,7 +36,7 @@ class BlogPostController extends Controller
     {
         $model = new BlogPost();
         $this->authorize('create', $model);
-        $authors = Account::all()->pluck('name', 'id');
+        $authors = Account::all()->pluck('nickname', 'id');
         $categories = BlogCategory::all()->pluck('alias_name', 'id');
         return view('frontend.blog-post.create', ['model' => $model, 'authors' => $authors, 'categories' => $categories]);
     }
@@ -60,7 +60,7 @@ class BlogPostController extends Controller
         }
         $model->save();
         $model->categories()->sync($request->input('categories'));
-        return redirect()->route('frontend.blog-post.index');
+        return redirect()->route('frontend.blog-post.index')->with('success', trans('models.saved'));
     }
 
     public function show($identifier)
@@ -104,6 +104,6 @@ class BlogPostController extends Controller
         }
         $model->save();
         $model->categories()->sync($request->input('categories'));
-        return redirect()->route('frontend.blog-post.edit', $model->id)->with('success', trans('models.updated', ['name' => 'Post']));
+        return redirect()->route('frontend.blog-post.edit', $model->id)->with('success', trans('models.updated'));
     }
 }

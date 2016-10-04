@@ -1,12 +1,12 @@
 import { Injectable, EventEmitter, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
 import 'rxjs/add/operator/toPromise';
+import { appConfigData } from '../app-config-data';
 import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService implements OnDestroy {
-    private host: string = `${window.location.protocol}//${window.location.hostname}:8081`;
+    private host = `${appConfigData.endpoint_url}:${appConfigData.socket_port}`;
     private socket;
     public status = new EventEmitter();
 
@@ -14,13 +14,7 @@ export class SocketService implements OnDestroy {
     }
 
     public configure(): void {
-        let token = Cookie.get('token');
-        if (token) {
-            token = `token=${token}`;
-        }
-        this.socket = io(this.host, {
-            'query': token
-        });
+        this.socket = io(this.host);
     }
 
     public asObservable(): Observable<any> {
@@ -36,7 +30,6 @@ export class SocketService implements OnDestroy {
                     this.status.emit(status);
                     observer.next({ action: status });
                 });
-                this.socket.on('user account', (data) => observer.next({ action: 'user-account', data: data }));
                 this.socket.on('chat message', (data) => observer.next({ action: 'chat-message', data: data }));
                 this.socket.on('notify others', (data) => observer.next({ action: 'system-message', data: data }));
                 return () => this.socket.close();
@@ -44,8 +37,12 @@ export class SocketService implements OnDestroy {
         );
     }
 
-    public send(data: any) {
-        this.socket.emit('chat message', data);
+    /*public broadcast(data: any) {
+        this.socket.broadcast.emit('notify others', data);
+    }*/
+
+    public send(data: any, type = 'chat message') {
+        this.socket.emit(type, data);
     }
 
     public latest(index: number) {

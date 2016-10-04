@@ -17,7 +17,9 @@
         "firebase/php-jwt": "^4.0",
         "laravel/socialite": "^2.0",
         "socialiteproviders/vkontakte": "^2.0",
-        "aayaresko/laravel-language": "dev-master"
+        "aayaresko/laravel-language": "dev-master",
+        "laravel/passport": "^1.0",
+        "barryvdh/laravel-cors": "^0.8.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

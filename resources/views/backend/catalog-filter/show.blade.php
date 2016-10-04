@@ -17,16 +17,19 @@
                 <span class="text-info">@lang('filter.type_label'):</span> {{ $model->type }}
             </p>
             <p>
-                <span class="text-info">@lang('filter.left_property_label'):</span> {{ $model->left_property_id ? $model->leftProperty->value_label : '' }}
+                <span class="text-info">@lang('filter.left_property_label')
+                    :</span> {{ $model->left_property_id ? $model->leftProperty->value_label : '' }}
             </p>
             <p>
-                <span class="text-info">@lang('filter.right_property_label'):</span> {{ $model->right_property_id ? $model->rightProperty->value_label : '' }}
+                <span class="text-info">@lang('filter.right_property_label')
+                    :</span> {{ $model->right_property_id ? $model->rightProperty->value_label : '' }}
             </p>
             <p>
                 <span class="text-info">@lang('content.category'):</span> {{ $model->category->visible_name }}
             </p>
             <p>
-                <span class="text-info">@lang('filter.catalog_category'):</span> {{ $model->catalogCategory->visible_name }}
+                <span class="text-info">@lang('filter.catalog_category')
+                    :</span> {{ $model->catalogCategory->visible_name }}
             </p>
             <p>
                 <span class="text-info">@lang('content.description_label'):</span> {{ $model->description }}

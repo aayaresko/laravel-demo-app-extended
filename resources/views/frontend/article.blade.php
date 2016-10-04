@@ -12,7 +12,9 @@
         <div class="panel-body">
             <div class="post-image">
                 @if ($model->preview_image_url)
-                    <p><img src="{{ $model->getImagePath('preview_image_url') }}" alt="{{ $model->title }}" class="img-rounded img-responsive"></p>
+                    <p>
+                        <img src="{{ $model->getImagePath('preview_image_url') }}" alt="{{ $model->title }}" class="img-rounded img-responsive">
+                    </p>
                 @endif
             </div>
             <div class="post-content">
@@ -20,7 +22,8 @@
             </div>
         </div>
         <div class="panel-footer">
-            <p class="text-muted">@lang('content.created_by', [ 'author' => $model->author->profile->full_name ]), {{ $model->created }}</p>
+            <p class="text-muted">@lang('content.created_by', [ 'author' => $model->author->profile->full_name ])
+                , {{ $model->created }}</p>
             @can('update-own-post', $model)
                 <a href="{{ route('frontend.blog-post.edit', $model->id) }}" class="btn btn-primary">@lang('content.edit')</a>
             @endcan

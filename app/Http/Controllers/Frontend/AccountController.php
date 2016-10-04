@@ -33,7 +33,7 @@ class AccountController extends Controller
     {
         $account = new Account();
         $profile = new AccountProfile();
-        return view('frontend.account.create', ['model' => $account, 'profile' => $profile]);
+        return view('frontend.account.create', ['account' => $account, 'profile' => $profile]);
     }
 
     public function store(Request $request)
@@ -67,7 +67,7 @@ class AccountController extends Controller
     {
         $account = Auth::user();
         $this->authorize('update-own-profile', $account->profile);
-        return view('frontend.account.update', ['model' => $account, 'profile' => $account->profile]);
+        return view('frontend.account.update', ['account' => $account, 'profile' => $account->profile]);
     }
 
     public function update(Request $request)

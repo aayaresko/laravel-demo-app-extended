@@ -32,7 +32,7 @@ class CatalogProductPropertyController extends Controller
             'visible_name' => "required|string|max:255|unique:{$model->getTable()},visible_name",
         ]);
         $model->save();
-        return redirect()->route('backend.catalog-product-property.index')->with('success', trans('models.saved', ['name' => 'Product property']));
+        return redirect()->route('backend.catalog-product-property.index')->with('success', trans('models.saved'));
     }
 
     public function show($id)
@@ -61,7 +61,7 @@ class CatalogProductPropertyController extends Controller
         }
         $this->validate($request, $requirements);
         $model->save();
-        return redirect()->route('backend.catalog-product-property.edit', $model->id)->with('success', trans('models.saved', ['name' => 'Product property']));
+        return redirect()->route('backend.catalog-product-property.edit', $model->id)->with('success', trans('models.updated'));
     }
 
     public function destroy(Request $request, $id)
@@ -69,7 +69,7 @@ class CatalogProductPropertyController extends Controller
         $model = CatalogProductProperty::findOrFail($id);
         $model->delete();
         if (!$request->ajax()) {
-            return redirect()->route('backend.catalog-product-property.index')->with('success', trans('models.deleted', ['name' => 'Product property']));
+            return redirect()->route('backend.catalog-product-property.index')->with('success', trans('models.deleted'));
         }
     }
 

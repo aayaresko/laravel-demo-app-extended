@@ -37,14 +37,15 @@ class FeedbackRequestController extends Controller
         /** @var ContactMessage $model */
         $model->fill($request->all());
         $model->save();
-        return redirect()->route('backend.feedback-request.edit', $model->id)->with('success', trans('models.saved', ['name' => 'Contact message']));
+        return redirect()->route('backend.feedback-request.edit', $model->id)->with('success', trans('models.updated'));
     }
 
     public function destroy(Request $request, $id)
     {
-        if ($request->ajax()) {
-            $model = ContactMessage::findOrFail($id);
-            $model->delete();
+        $model = ContactMessage::findOrFail($id);
+        $model->delete();
+        if (!$request->ajax()) {
+            return redirect()->route('backend.feedback-request.index')->with('success', trans('models.deleted'));
         }
     }
 }

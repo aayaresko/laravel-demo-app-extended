@@ -31,7 +31,7 @@ class CatalogFilterCategoryController extends Controller
             'description' => 'string',
         ]);
         $model->save();
-        return redirect()->route('backend.catalog-filter-category.index')->with('success', trans('models.saved', ['name' => 'Category']));
+        return redirect()->route('backend.catalog-filter-category.index')->with('success', trans('models.saved'));
     }
 
     public function show($id)
@@ -62,7 +62,7 @@ class CatalogFilterCategoryController extends Controller
         }
         $this->validate($request, $requirements);
         $model->save();
-        return redirect()->route('backend.catalog-filter-category.edit', $model->id)->with('success', trans('models.updated', ['name' => 'Category']));
+        return redirect()->route('backend.catalog-filter-category.edit', $model->id)->with('success', trans('models.updated'));
     }
 
     public function destroy(Request $request, $id)
@@ -70,7 +70,7 @@ class CatalogFilterCategoryController extends Controller
         $model = CatalogFilterCategory::findOrFail($id);
         $model->delete();
         if (!$request->ajax()) {
-            return redirect()->route('backend.catalog-filter-category.index')->with('success', trans('models.deleted', ['name' => 'Category']));
+            return redirect()->route('backend.catalog-filter-category.index')->with('success', trans('models.deleted'));
         }
     }
 }

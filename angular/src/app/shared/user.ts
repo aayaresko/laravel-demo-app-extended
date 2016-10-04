@@ -1,22 +1,18 @@
 import { Account, AccountProfile } from '../account/index';
+import { appConfigData } from '../app-config-data';
 
 export class User {
     public account: Account;
     public profile: AccountProfile;
-    private uploads_path: string;
 
-    public constructor(private data: any) {
-        if (data.hasOwnProperty('account')) {
-            this.account = new Account(data.account.id, data.account.name, data.account.email, data.account.status, data.account.created_at);
-            if (data.account.hasOwnProperty('profile')) {
-                let profile = data.account.profile;
-                this.profile = new AccountProfile(profile.first_name, profile.last_name, profile.birth_date, profile.avatar_url, this.account.id);
+    public constructor(data: any) {
+        if (data.hasOwnProperty('nickname')) {
+            this.account = new Account(data.id, data.nickname, data.email, data.status, data.created_at);
+            if (data.hasOwnProperty('profile')) {
+                let profile = data.profile;
+                this.profile = new AccountProfile(profile.first_name, profile.last_name, profile.birth_date, profile.avatar_url, profile.account_id);
             }
         }
-        if (data.hasOwnProperty('options')) {
-            this.uploads_path = data.options.uploads_path ? data.options.uploads_path : null;
-        }
-        this.data = null;
     }
 
     public getFullName() {
@@ -28,13 +24,13 @@ export class User {
                     return full_name;
                 }
             }
-            return this.account.name;
+            return this.account.nickname;
         }
     }
 
     public getAvatarUrl() {
         if (this.profile) {
-            return `/${this.uploads_path}/thumbnail/${this.profile.avatar_url}`;
+            return `${appConfigData.uploads_path}/thumbnail/${this.profile.avatar_url}`;
         }
     }
 

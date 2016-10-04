@@ -37,7 +37,7 @@ class BlogCategoryController extends Controller
             'visible_name' => "required|string|max:255|unique:{$model->getTable()},visible_name",
         ]);
         $model->save();
-        return redirect()->route('backend.blog-category.index')->with('success', trans('models.saved', ['name' => 'Category']));
+        return redirect()->route('backend.blog-category.index')->with('success', trans('models.saved'));
     }
 
     public function show($id)
@@ -62,7 +62,7 @@ class BlogCategoryController extends Controller
             $this->validate($request, $requirements);
         }
         $model->save();
-        return redirect()->route('backend.blog-category.edit', $model->id)->with('success', trans('models.updated', ['name' => 'Category']));
+        return redirect()->route('backend.blog-category.edit', $model->id)->with('success', trans('models.updated'));
     }
 
     public function destroy(Request $request, $id)
@@ -70,7 +70,7 @@ class BlogCategoryController extends Controller
         $model = BlogCategory::findOrFail($id);
         $model->delete();
         if (!$request->ajax()) {
-            return redirect()->route('backend.blog-category.index')->with('success', trans('models.deleted', ['name' => 'Category']));
+            return redirect()->route('backend.blog-category.index')->with('success', trans('models.deleted'));
         }
     }
 }

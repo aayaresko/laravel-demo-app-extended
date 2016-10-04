@@ -1,9 +1,10 @@
 import { Component, OnInit, trigger, style, transition, animate, OnDestroy } from '@angular/core';
-import { User } from '../shared/index';
-import { Message } from './index';
 import { SocketService } from '../shared/socket.service';
 import { MessageService } from './message.service';
 import { UserService } from '../shared/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { Message } from './message';
+import { User } from '../shared/index';
 
 @Component({
     selector: 'app-live-chat',
@@ -31,13 +32,16 @@ import { UserService } from '../shared/user.service';
     ]
 })
 export class LiveChatComponent implements OnInit, OnDestroy {
-    private user: User = null;
+    private user: User;
     public connectionStatus = 'disconnected';
 
-    public constructor(private socketService: SocketService, private messageService: MessageService, private userService: UserService) {
+    public constructor(private socketService: SocketService, private messageService: MessageService, private router: ActivatedRoute) {
     }
 
     public ngOnInit() {
+        this.router.data.forEach((data: { user: User }) => {
+            this.user = data.user;
+        });
         this.socketService.configure();
         this.socketService.asObservable().subscribe(
             (item) => this.process(item),
@@ -57,21 +61,22 @@ export class LiveChatComponent implements OnInit, OnDestroy {
     }
 
     private process(item) {
+        let data;
         let action = item.action;
         switch (action) {
             case 'connected':
+                data = {
+                    message: new Message(' has connected', this.user.account.id)
+                };
+                this.socketService.send(data, 'notification');
                 this.socketService.latest(this.messageService.getIndex());
                 break;
             case 'chat-message':
             case 'system-message':
-                let data = item.data.message;
-                let message = new Message(data.content, data.author_id, data.created_at, action, data.id);
+                data = item.data.message;
+                console.log(data);
+                let message = new Message(data.content, data.author_id, data.author, data.created_at, action, data.id);
                 this.messageService.cache(message);
-                this.userService.cache(new User(item.data));
-                break;
-            case 'user-account':
-                this.userService.cache(new User(item.data));
-                this.user = this.userService.authenticated();
                 break;
         }
     }

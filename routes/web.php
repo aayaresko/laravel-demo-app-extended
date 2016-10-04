@@ -21,6 +21,8 @@ Route::get('/index', function () {
     return view('frontend.index');
 });
 
+Route::get('test-api', 'Frontend\SiteController@testApi');
+
 Route::get('auth/github', [
     'uses' => 'Auth\GithubController@redirectToProvider',
     'as' => 'auth.github'
@@ -60,11 +62,6 @@ Route::get('logout', [
 Route::group(['namespace' => 'Frontend'], function () {
     Route::post('update-browser-timezone-offset', [
         'uses' => 'SiteController@updateBrowserTimezoneOffset',
-    ]);
-
-    Route::get('{locale}/update-locale', [
-        'uses' => 'SiteController@updateLocale',
-        'as' => 'frontend.update-locale'
     ]);
 
     Route::post('like-blog-post', [
@@ -217,12 +214,12 @@ Route::group(['prefix' => Language::getLocale()], function () {
 
         Route::group(['middleware' => 'auth', 'prefix' => 'live-chat'], function () {
             Route::get('index', [
-                'uses' => 'LiveChatController@index',
-                'as' => 'frontend.live-chat.index',
+                'uses' => 'SiteController@showLiveChat',
+                'as' => 'frontend.live-chat.index'
             ]);
         });
 
-        Route::group(['prefix' => 'subscriptions'], function () {
+        Route::group(['middleware' => 'auth', 'prefix' => 'subscriptions'], function () {
             Route::group(['middleware' => 'auth'], function () {
                 Route::get('edit', [
                     'uses' => 'SubscriptionsController@edit',
@@ -235,6 +232,32 @@ Route::group(['prefix' => Language::getLocale()], function () {
             });
         });
 
+        Route::group(['middleware' => 'auth', 'prefix' => 'task'], function () {
+            Route::get('index', [
+                'uses' => 'TaskController@index',
+                'as' => 'frontend.task.index'
+            ]);
+            Route::get('create', [
+                'uses' => 'TaskController@create',
+                'as' => 'frontend.task.create'
+            ]);
+            Route::post('store', [
+                'uses' => 'TaskController@store',
+                'as' => 'frontend.task.store'
+            ]);
+            Route::get('edit/{id}', [
+                'uses' => 'TaskController@edit',
+                'as' => 'frontend.task.edit'
+            ]);
+            Route::post('update/{id}', [
+                'uses' => 'TaskController@update',
+                'as' => 'frontend.task.update'
+            ]);
+            Route::match(['get', 'post'], 'destroy/{id}', [
+                'uses' => 'TaskController@destroy',
+                'as' => 'frontend.task.destroy',
+            ]);
+        });
     });
 
     Route::group(['namespace' => 'Backend', 'middleware' => 'backend.auth', 'prefix' => 'admin', /*'domain' => 'admin.*'*/], function () {

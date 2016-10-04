@@ -37,7 +37,8 @@
                 @endcan
             </div>
             <div class="col-md-8">
-                <p class="text-muted pull-right">@lang('content.created_by', [ 'author' => $model->author->profile->full_name ]), {{ $model->created }}</p>
+                <p class="text-muted pull-right">@lang('content.created_by', [ 'author' => $model->author->profile->full_name ])
+                    , {{ $model->created }}</p>
             </div>
         </div>
     </div>

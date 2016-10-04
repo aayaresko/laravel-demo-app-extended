@@ -26,7 +26,7 @@ class CatalogProductController extends Controller
 
     public function create()
     {
-        $authors = Account::all()->pluck('name', 'id');
+        $authors = Account::all()->pluck('nickname', 'id');
         $categories = CatalogCategory::all()->pluck('visible_name', 'id');
         $model = new CatalogProduct();
         return view('backend.catalog-product.create', [
@@ -52,7 +52,7 @@ class CatalogProductController extends Controller
         }
         $model->save();
         $model->categories()->sync($request->input('categories'));
-        return redirect()->route('backend.index');
+        return redirect()->route('backend.index')->with('success', trans('models.saved'));
     }
 
     public function show($identifier)
@@ -68,7 +68,7 @@ class CatalogProductController extends Controller
     public function edit($id)
     {
         $model = CatalogProduct::findOrFail($id);
-        $authors = Account::all()->pluck('name', 'id');
+        $authors = Account::all()->pluck('nickname', 'id');
         $categories = CatalogCategory::all()->pluck('visible_name', 'id');
         return view('backend.catalog-product.update', [
             'model' => $model,
@@ -102,7 +102,7 @@ class CatalogProductController extends Controller
         }
         $model->save();
         $model->categories()->sync($request->input('categories'));
-        return redirect()->route('backend.catalog-product.edit', $model->id)->with('success', trans('models.updated', ['name' => 'Product']));
+        return redirect()->route('backend.catalog-product.edit', $model->id)->with('success', trans('models.updated'));
     }
 
     public function destroy(Request $request, $id)
@@ -110,7 +110,7 @@ class CatalogProductController extends Controller
         $model = CatalogProduct::findOrFail($id);
         $model->delete();
         if (!$request->ajax()) {
-            return redirect()->route('backend.catalog-product.index')->with('success', trans('models.deleted', ['name' => 'Product']));
+            return redirect()->route('backend.catalog-product.index')->with('success', trans('models.deleted'));
         }
     }
 }

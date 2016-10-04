@@ -21,6 +21,6 @@ class ProductPropertiesController extends Controller
         $model = CatalogProduct::findOrFail($id);
         /** @var CatalogProduct $model */
         $model->properties()->sync($request->input('properties'));
-        return redirect()->route('backend.catalog-product.edit', $model->id)->with('success', trans('models.updated', ['name' => 'Catalog product properties']));
+        return redirect()->route('backend.catalog-product.edit', $model->id)->with('success', trans('models.saved'));
     }
 }

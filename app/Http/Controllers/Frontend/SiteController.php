@@ -9,6 +9,7 @@ use App\Components\Extra\SiteFeatures;
 use App\Http\Controllers\Controller;
 use App\Models\Entities\BlogPost;
 use App\Models\Entities\ContactMessage;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -36,5 +37,15 @@ class SiteController extends Controller
             $model = BlogPost::findOrFail($identifier);
         }
         return view('frontend.article', ['model' => $model]);
+    }
+
+    public function showLiveChat()
+    {
+        return view('frontend.live-chat.index');
+    }
+
+    public function showTasksBoard()
+    {
+        return view('frontend.tasks-board.index');
     }
 }

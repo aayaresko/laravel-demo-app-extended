@@ -5,11 +5,14 @@
     <div class="panel-body">
         <div class="post-image">
             @if ($model->preview_image_url)
-                <p><img src="{{ $model->getImagePreviewPath('preview_image_url') }}" alt="{{ $model->title }}" class="img-rounded img-responsive"></p>
+                <p>
+                    <img src="{{ $model->getImagePreviewPath('preview_image_url') }}" alt="{{ $model->title }}" class="img-rounded img-responsive">
+                </p>
             @endif
         </div>
         <div class="post-content">
-            {!! $model->preview !!} <a href="{{ route('frontend.blog-post.show', $model->alias_name) }}">@lang('blog.read_more_title')</a>
+            {!! $model->preview !!}
+            <a href="{{ route('frontend.blog-post.show', $model->alias_name) }}">@lang('blog.read_more_title')</a>
         </div>
         <div class="post-categories pull-right">
             @foreach($model->categories as $category)
@@ -26,7 +29,8 @@
             </div>
             <div class="col-md-5">
                 <span class="text-muted pull-right">
-                    {{ $model->created }}<br><a href="{{ route('backend.account.show', $model->author_id) }}">{{ $model->author->profile->full_name }}</a>
+                    {{ $model->created }}
+                    <br><a href="{{ route('backend.account.show', $model->author_id) }}">{{ $model->author->profile->full_name }}</a>
                 </span>
             </div>
         </div>

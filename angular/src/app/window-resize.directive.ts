@@ -8,10 +8,6 @@ export class WindowResizeDirective {
         this.resize();
     }
 
-    @HostListener('window:load') onLoad() {
-        this.resize();
-    }
-
     constructor(private element: ElementRef, private renderer: Renderer) {
     }
 

@@ -19,13 +19,12 @@ class CatalogProductController extends Controller
         $category = CatalogCategory::where('alias_name', '=', $category)->first();
         $query = CatalogProduct::distinct();
         $facade = new CatalogFilterFacade();
-        if ($facade->parseFilterQuery($filter)) {
-            $facade->attachConditionsToQuery($query, $category);
-        }
+        $facade->parseFilterQuery($filter);
+        $facade->attachConditionsToQuery($query, $category);
         $filters = CatalogFilter::all();
         $categories = CatalogCategory::all();
         return view('frontend.catalog-product.index', [
-            'models' => $query->get(),
+            'models' => $query->paginate(12),
             'filter_parameters' => $facade->getFilterParameters(),
             'filters' => $filters,
             'category' => $category,

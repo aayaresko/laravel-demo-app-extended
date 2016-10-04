@@ -5,7 +5,9 @@
     <div class="panel-body">
         <div class="post-image">
             @if ($model->image_url)
-                <p><img src="{{ $model->getImagePreviewPath('image_url') }}" alt="{{ $model->visible_name }}" class="img-rounded img-responsive"></p>
+                <p>
+                    <img src="{{ $model->getImagePreviewPath('image_url') }}" alt="{{ $model->visible_name }}" class="img-rounded img-responsive">
+                </p>
             @endif
         </div>
         <p class="post-content">
@@ -21,7 +23,8 @@
             </div>
             <div class="col-md-5">
                 <span class="text-muted pull-right">
-                    {{ $model->created }}<br><a href="{{ route('backend.account.show', $model->author_id) }}">{{ $model->author->profile->full_name }}</a>
+                    {{ $model->created }}
+                    <br><a href="{{ route('backend.account.show', $model->author_id) }}">{{ $model->author->profile->full_name }}</a>
                 </span>
             </div>
         </div>

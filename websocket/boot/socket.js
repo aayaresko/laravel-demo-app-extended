@@ -6,87 +6,76 @@
  * Created by aayaresko on 18.09.16.
  */
 const config = require('../config');
-const socketioJwt = require('socketio-jwt');
 
 class Socket {
     constructor(database, port) {
-        this.database = database;
         this.port = port;
+        this.database = database;
         this.account = this.database.models.account;
         this.profile = this.database.models.account_profile;
         this.message = this.database.models.chat_message;
         this.container = {
-            account: null,
-            options: {
-                uploads_path: config.global.uploads_path
-            }
+            message: {},
         };
-        this.containers = [];
     }
 
     run() {
         const io = require('socket.io')(this.port);
-        io.use(socketioJwt.authorize({
-                secret: config.global.secret,
-                timeout: 1500, // 15 seconds to send the authentication message
-                handshake: true, // validate token on handshake
-                callback: false // No client-side callback, terminate connection server-side
-            })
-        );
-        io.on('connection', client => {
-            console.log('user connected');
-            let token = client.decoded_token;
-            // first of all lets find current account model
-            this.findAccountById(token.id).then((account) => {
-                if (account) {
-                    this.container.account = account.toJSON();
-                    this.container.message = {content: 'has joined', author_id: account.id};
-                    client.emit('user account', this.container);
-                    client.broadcast.emit('notify others', this.container);
-                    // Since there is no possibility to send message when user model is not defined
-                    // we will attach 'chat message' and 'user disconnected' event listeners only after that model have been defined
-                    client.on('chat message', (data) => {
-                        account.createMessage(data.message).then((message) => {
-                            this.container.account = account.toJSON();
-                            this.container.message = message.toJSON();
-                            // send message to all users
-                            io.emit('chat message', this.container);
+        io.on('connection', (client) => {
+            client.on('notification', (data) => {
+                if (data.message.author_id) {
+                    this.accountFindById(data.message.author_id).then((account) => {
+                        this.container.message = data.message;
+                        this.container.message.author = account.toJSON();
+                        client.broadcast.emit('notify others', this.container);
+                        // we store current user data in backup_container to use them, when and in case current user will be disconnected
+                        let backup_container = Object.assign({}, this.container);
+                        client.on('disconnect', () => {
+                            // current user has been disconnected
+                            // use a backup of current container which contains current user data
+                            backup_container.message.content = ' has disconnected';
+                            // notify other users
+                            client.broadcast.emit('notify others', backup_container);
                         });
                     });
-                    client.on('disconnect', () => {
-                        this.container.account = account.toJSON();
-                        this.container.message = {content: 'has left', author_id: this.container.account.id};
-                        client.broadcast.emit('notify others', this.container);
-                        console.log('user disconnected');
-                    });
+                }
+            });
+            client.on('chat message', (data) => {
+                if (data.message.author_id) {
+                    this.accountFindById(data.message.author_id).then((account) => {
+                        account.createMessage(data.message).then((message) => {
+                            let data = message.toJSON();
+                            data.author = account.toJSON();
+                            this.container.message = data;
+                            io.emit('chat message', this.container);
+                        });
+                    }).catch((error) => console.log(error));
                 }
             });
             // find 10 latest messages
             client.on('latest messages', (data) => {
                 this.message.findAll({
-                    where: {
-                        id: {
-                            $gt: data.index
-                        }
-                    },
+                    where: {id: {$gt: data.index}},
                     include: [
-                        {model: this.account, as: 'author', include: [{model: this.profile, as: 'profile'}]}
+                        {
+                            model: this.account, as: 'author', include: [
+                                {model: this.profile, as: 'profile'}
+                            ]
+                        }
                     ],
                     limit: 10,
                     order: [['created_at']]
                 }).then((messages) => {
                     messages.forEach((message) => {
-                        this.container.account = message.author.toJSON();
                         this.container.message = message.toJSON();
-                        delete this.container.message.author;
                         client.emit('chat message', this.container);
                     });
-                });
+                }).catch((error) => console.log(error));
             });
         });
     }
 
-    findAccountById(id) {
+    accountFindById(id) {
         return this.account.findById(id, {
             include: [
                 {model: this.profile, as: 'profile'}

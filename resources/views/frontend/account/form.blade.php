@@ -3,11 +3,11 @@
     <div class="col-md-2">
         <div class="form-group">
             {{ Form::label('nickname', trans('account.nickname_label'), ['class' => 'control-label']) }}
-            {{ Form::text('nickname', $model->nickname, ['placeholder' => trans('account.nickname_label'), 'class' => 'form-control']) }}
+            {{ Form::text('nickname', $account->nickname, ['placeholder' => trans('account.nickname_label'), 'class' => 'form-control']) }}
         </div>
         <div class="form-group">
             {{ Form::label('email', trans('account.email_label'), ['class' => 'control-label']) }}
-            {{ Form::text('email', $model->email, ['placeholder' => trans('account.email_placeholder'), 'class' => 'form-control']) }}
+            {{ Form::text('email', $account->email, ['placeholder' => trans('account.email_placeholder'), 'class' => 'form-control']) }}
         </div>
     </div>
     <div class="col-md-2 col-md-offset-1">

@@ -35,7 +35,7 @@
             {{ Form::select('categories[]', $categories, $model->categories()->pluck('id')->all(), ['multiple', 'class' => 'multiple-select js-example-basic-single js-states form-control']) }}
         </div>
         <div class="form-group">
-            {{ Form::label('is_published', trans('blog.post_is_published'), ['class' => 'control-label']) }}
+            {{ Form::label('is_published', trans('blog.is_post_published'), ['class' => 'control-label']) }}
             {{ Form::select('is_published', [ 0 => trans('content.no'), 1 => trans('content.yes') ], $model->is_published, ['class' => 'form-control']) }}
         </div>
         <div class="form-group">

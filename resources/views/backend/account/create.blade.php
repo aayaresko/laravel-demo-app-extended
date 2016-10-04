@@ -8,7 +8,7 @@
     <h1>@lang('account.new_title')</h1>
     <div class="row">
         <div class="col-md-12">
-            @include('backend.account.form', ['account' => $account, 'profile' => $profile])
+            @include('backend.account.form')
             @include('backend.includes.info-box')
         </div>
     </div>

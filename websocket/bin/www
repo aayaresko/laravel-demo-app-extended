@@ -8,23 +8,17 @@
  * Handles some configurations errors.
  *
  */
-const AppHelper = require( '../boot/app-helper' );
 
-const config = require( '../config' );
-const Database = require( '../boot/sequelize' );
+const config = require('../config');
+const Database = require('../boot/sequelize');
 const database = Database.instantiate();
 
-let Loader = require( '../entities/models/index' );
-let models = new Loader( database );
-
-/**
- * Get port from environment and store in Express
- */
-let port = AppHelper.normalizePort( config.global.port || 8081 );
+let Loader = require('../entities/models/index');
+let models = new Loader(database);
 
 /**
  * Listening on provided port, on all network interfaces
  */
-const Socket = require( '../boot/socket' );
-const socket = new Socket( database, port );
+const Socket = require('../boot/socket');
+const socket = new Socket(database, config.socket.port);
 socket.run();

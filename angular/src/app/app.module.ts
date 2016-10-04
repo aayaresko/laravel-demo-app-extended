@@ -6,9 +6,11 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/index';
 import { LiveChatModule } from './live-chat/live-chat.module';
-import { TasksBoardModule } from './tasks-board/tasks-board.module';
 import { UserService } from './shared/user.service';
+import { UserResolveService } from './shared/user-resolve.service';
 import { routing, appRoutingProviders } from './app.routing';
+import { appConfigData } from './app-config-data';
+import { APP_CONFIG } from './app.config';
 
 @NgModule({
     imports: [
@@ -18,13 +20,18 @@ import { routing, appRoutingProviders } from './app.routing';
         HttpModule,
         routing,
         LiveChatModule,
-        TasksBoardModule
     ],
     declarations: [
         AppComponent,
         PageNotFoundComponent,
     ],
-    providers: [UserService, Cookie, appRoutingProviders],
+    providers: [
+        UserService,
+        UserResolveService,
+        Cookie,
+        appRoutingProviders,
+        { provide: APP_CONFIG, useValue: appConfigData }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

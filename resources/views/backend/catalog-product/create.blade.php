@@ -8,7 +8,7 @@
     <h1>@lang('catalog.new_title')</h1>
     <div class="row">
         <div class="col-md-12">
-            @include('backend.catalog-product.form', ['authors' => $authors, 'categories' => $categories])
+            @include('backend.catalog-product.form')
             @include('backend.includes.info-box')
         </div>
     </div>

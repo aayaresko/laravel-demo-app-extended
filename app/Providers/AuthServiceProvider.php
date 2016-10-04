@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Entities\CatalogFilter' => 'App\Policies\CatalogFilterPolicy',
         'App\Models\Entities\CatalogFilterCategory' => 'App\Policies\CatalogFilterCategoryPolicy',
         'App\Models\Entities\CatalogProductProperty' => 'App\Policies\CatalogProductPropertyPolicy',
+        'App\Models\Entities\Task' => 'App\Policies\TaskPolicy',
         'App\Models\Entities\AccountProfile' => 'App\Policies\AccountProfilePolicy',
         'App\Models\Entities\Account' => 'App\Policies\AccountPolicy',
     ];
@@ -32,6 +34,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Passport::routes(null, ['middleware' => 'cors']);
         //
     }
 }

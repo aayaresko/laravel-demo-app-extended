@@ -31,18 +31,13 @@ class AccountController extends Controller
             new Account(),
             new AccountProfile()
         );
+        $facade->send_email = false;
         $validate = $facade->getValidationRequirements($request->all());
         if ($validate) {
             $this->validate($request, $validate);
         }
-        if ($facade->save()) {
-            $type = 'success';
-            $message = trans('account.confirmation_required');
-        } else {
-            $type = 'error';
-            $message = trans('unknown.error');
-        }
-        return redirect()->route('frontend.index')->with($type, $message);
+        $facade->save();
+        return redirect()->route('frontend.account.index')->with('success', trans('models.saved'));
     }
 
     public function show($id)
@@ -73,7 +68,7 @@ class AccountController extends Controller
             $profile->saveImages();
         }
         $facade->update();
-        return redirect()->route('backend.account.edit', $facade->getAccount()->id)->with('success', trans('models.updated', ['name' => trans_choice('account.title', 1)]));
+        return redirect()->route('backend.account.edit', $facade->getAccount()->id)->with('success', trans('models.updated'));
     }
 
     public function destroy(Request $request, $id)
@@ -81,7 +76,7 @@ class AccountController extends Controller
         $model = Account::findOrFail($id);
         $model->delete();
         if (!$request->ajax()) {
-            return redirect()->route('backend.account.index')->with('success', trans('models.deleted', ['name' => trans_choice('account.title', 1)]));
+            return redirect()->route('backend.account.index')->with('success', trans('models.deleted'));
         }
     }
 }

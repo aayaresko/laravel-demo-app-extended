@@ -6,10 +6,11 @@ use App\Components\Decorators\DateFormatDecorator;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class Account extends User
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     const STATUS_UNCONFIRMED = null;
     const STATUS_INACTIVE = 0;
@@ -85,6 +86,14 @@ class Account extends User
     public function chat_messages()
     {
         return $this->hasMany(ChatMessage::class, 'author_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'author_id');
     }
 
     /**

@@ -23,14 +23,11 @@ config.mysql = {
 
 config.global = {
     env: 'development',
-    secret: data['JWT_SECRET'],
-    port: data['WEB_SOCKET_PORT'],
-    author: {
-        email: data['MAIL_FROM_ADDRESS'],
-        name: data['MAIL_FROM_NAME'],
-        url: 'https://github.com/aayaresko'
-    },
-    uploads_path: data['UPLOADS_PATH']
+};
+
+config.socket = {
+    secret: '',
+    port: 8080,
 };
 
 module.exports = config;

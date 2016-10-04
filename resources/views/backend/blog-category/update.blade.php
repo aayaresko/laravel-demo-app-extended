@@ -9,7 +9,7 @@
     <h1>@lang('category.update') '{{ $model->visible_name }}'</h1>
     <div class="row">
         <div class="col-md-12">
-            @include('backend.blog-category.form', ['model' => $model])
+            @include('backend.blog-category.form')
         </div>
     </div>
 @endsection

@@ -24,7 +24,7 @@ class BlogPostController extends Controller
 
     public function create()
     {
-        $authors = Account::all()->pluck('name', 'id');
+        $authors = Account::all()->pluck('nickname', 'id');
         $categories = BlogCategory::all()->pluck('alias_name', 'id');
         $model = new BlogPost();
         return view('backend.blog-post.create', ['model' => $model, 'authors' => $authors, 'categories' => $categories]);
@@ -45,7 +45,7 @@ class BlogPostController extends Controller
         }
         $model->save();
         $model->categories()->sync($request->input('categories'));
-        return redirect()->route('backend.blog-post.index')->with('success', trans('models.saved', ['name' => 'Post']));
+        return redirect()->route('backend.blog-post.index')->with('success', trans('models.saved'));
     }
 
     public function show($identifier)
@@ -61,7 +61,7 @@ class BlogPostController extends Controller
     public function edit($id)
     {
         $model = BlogPost::findOrFail($id);
-        $authors = Account::all()->pluck('name', 'id');
+        $authors = Account::all()->pluck('nickname', 'id');
         $categories = BlogCategory::all()->pluck('alias_name', 'id');
         return view('backend.blog-post.update', ['model' => $model, 'authors' => $authors, 'categories' => $categories]);
     }
@@ -86,7 +86,7 @@ class BlogPostController extends Controller
         }
         $model->save();
         $model->categories()->sync($request->input('categories'));
-        return redirect()->route('backend.blog-post.edit', $model->id)->with('success', trans('models.updated', ['name' => 'Post']));
+        return redirect()->route('backend.blog-post.edit', $model->id)->with('success', trans('models.updated'));
     }
 
     public function destroy(Request $request, $id)
@@ -94,7 +94,7 @@ class BlogPostController extends Controller
         $model = BlogPost::findOrFail($id);
         $model->delete();
         if (!$request->ajax()) {
-            return redirect()->route('backend.blog-post.index')->with('success', trans('models.deleted', ['name' => 'Post']));
+            return redirect()->route('backend.blog-post.index')->with('success', trans('models.deleted'));
         }
     }
 }

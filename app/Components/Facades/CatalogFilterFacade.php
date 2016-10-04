@@ -83,7 +83,6 @@ class CatalogFilterFacade
      * Check out [[parseFilterParameters]] for details.
      *
      * @param string $filter_query
-     * @return bool
      */
     public function parseFilterQuery($filter_query = '')
     {
@@ -93,7 +92,6 @@ class CatalogFilterFacade
                 $this->parseFilterParameters($parameters);
             }
         }
-        return false;
     }
 
     /**

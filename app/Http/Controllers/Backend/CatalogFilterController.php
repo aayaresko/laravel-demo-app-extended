@@ -48,7 +48,7 @@ class CatalogFilterController extends Controller
             'title' => "required|string|max:255|unique:{$model->getTable()},title",
         ]);
         $model->save();
-        return redirect()->route('backend.catalog-filter.index')->with('success', trans('models.saved', ['name' => 'Catalog filter']));
+        return redirect()->route('backend.catalog-filter.index')->with('success', trans('models.saved'));
     }
 
     public function show($id)
@@ -85,7 +85,7 @@ class CatalogFilterController extends Controller
             $this->validate($request, $requirements);
         }
         $model->save();
-        return redirect()->route('backend.catalog-filter.edit', $model->id)->with('success', trans('models.updated', ['name' => 'Catalog filter']));
+        return redirect()->route('backend.catalog-filter.edit', $model->id)->with('success', trans('models.updated'));
     }
 
     public function destroy(Request $request, $id)
@@ -93,7 +93,7 @@ class CatalogFilterController extends Controller
         $model = CatalogFilter::findOrFail($id);
         $model->delete();
         if (!$request->ajax()) {
-            return redirect()->route('backend.catalog-filter.index')->with('success', trans('models.deleted', ['name' => 'Catalog filter']));
+            return redirect()->route('backend.catalog-filter.index')->with('success', trans('models.deleted'));
         }
     }
 }

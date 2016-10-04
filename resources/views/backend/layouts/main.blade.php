@@ -19,24 +19,24 @@
     @yield('scripts')
 </head>
 <body>
-    <div class="header">
-        <div class="content">
-            @include('backend.includes.header')
+<div class="header">
+    <div class="content">
+        @include('backend.includes.header')
+    </div>
+</div>
+<div class="wrap">
+    <div class="content">
+        <div class="container-fluid">
+            @yield('content')
         </div>
     </div>
-    <div class="wrap">
-        <div class="content">
-            <div class="container-fluid">
-                @yield('content')
-            </div>
+</div>
+<div class="footer">
+    <div class="content">
+        <div class="container-fluid">
+            @include('backend.includes.footer')
         </div>
     </div>
-    <div class="footer">
-        <div class="content">
-            <div class="container-fluid">
-                @include('backend.includes.footer')
-            </div>
-        </div>
-    </div>
+</div>
 </body>
 </html>

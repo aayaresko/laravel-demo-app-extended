@@ -27,7 +27,7 @@ class TaskController extends Controller
     public function index()
     {
         $models = Task::with('author.profile')->orderBy('created_at', 'asc')->get();
-        return response()->json($models);
+        return response($models);
     }
 
     /**
@@ -37,7 +37,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return response('', 501);
+        return response([], 501);
     }
 
     /**
@@ -53,7 +53,7 @@ class TaskController extends Controller
         $account = $request->user();
         /** @var $account Account */
         $account->tasks()->create($request->all());
-        return response('', 204);
+        return response([], 204);
     }
 
     /**
@@ -64,8 +64,8 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        $model = Task::findOrFail($id);
-        return response()->json($model);
+        $model = Task::with('author.profile')->findOrFail($id);
+        return response($model);
     }
 
     /**
@@ -76,8 +76,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $model = Task::findOrFail($id);
-        return response()->json($model);
+        return response([], 501);
     }
 
     /**
@@ -94,7 +93,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = Task::firstOrNew(['id', $id]);
+        $model = Task::firstOrNew(['id' => $id]);
         /** @var Model $model */
         $model->fill($request->all());
         if ($model->exists) {
@@ -103,7 +102,7 @@ class TaskController extends Controller
             $code = 201;
         }
         $model->save();
-        return response('', $code);
+        return response([], $code);
 
     }
 
@@ -120,6 +119,6 @@ class TaskController extends Controller
         $model = Task::findOrFail($id);
         /** @var Model $model */
         $model->delete();
-        return response('', 204);
+        return response([], 204);
     }
 }

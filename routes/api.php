@@ -17,11 +17,11 @@ use Illuminate\Http\Request;
     return $request->user();
 })->middleware('auth:api');*/
 
-Route::group(['middleware' => ['auth:api', 'cors']], function () {
+Route::group(['middleware' => ['cors', 'auth:api']], function () {
     Route::get('/user', function (Request $request) {
         $account = $request->user();
         $account->profile;
-        return $account;
+        return response()->json($account);
     });
     Route::group(['namespace' => 'REST'], function () {
         Route::resource('tasks', 'TaskController');

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Message } from './message';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class MessageService {

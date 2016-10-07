@@ -24,5 +24,4 @@ export class MessagesListComponent implements OnInit {
     public ngOnInit() {
         this.messageService.all().then(messages => this.messages = messages);
     }
-
 }

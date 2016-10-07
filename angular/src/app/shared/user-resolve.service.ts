@@ -1,25 +1,22 @@
-import { Resolve } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { AuthorizationService } from './authorization.service';
 import { User } from './user';
-import { UserService } from './user.service';
 
 @Injectable()
 export class UserResolveService implements Resolve<User> {
 
-    public constructor(private service: UserService) {
-
+    constructor(private service: AuthorizationService) {
     }
 
-    public resolve(): Promise<User>|Promise<boolean> {
-        // There is some problem with Observable in that scenario...
-        return this.service
-            .authenticated()
+    public resolve(route: ActivatedRouteSnapshot): Promise<User>|Promise<boolean> {
+        return this.service.getUserData()
             .toPromise()
-            .then((user) => {
+            .then((user: User) => {
                 if (user) {
                     return user;
                 } else {
-                    return null;
+                    return false;
                 }
             });
     }

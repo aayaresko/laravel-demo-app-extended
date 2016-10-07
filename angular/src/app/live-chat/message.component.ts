@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Message } from './message';
-import { User } from '../shared/index';
+import { User } from '../shared/user';
 
 @Component({
     selector: 'app-live-chat-message',
@@ -18,5 +18,4 @@ export class MessageComponent implements OnInit {
             this.author = new User(this.message.author);
         }
     }
-
 }

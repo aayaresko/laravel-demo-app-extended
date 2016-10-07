@@ -1,10 +1,9 @@
 import { Component, OnInit, trigger, style, transition, animate, OnDestroy } from '@angular/core';
 import { SocketService } from '../shared/socket.service';
 import { MessageService } from './message.service';
-import { UserService } from '../shared/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { AuthorizationService } from '../shared/authorization.service';
 import { Message } from './message';
-import { User } from '../shared/index';
+import { User } from '../shared/user';
 
 @Component({
     selector: 'app-live-chat',
@@ -28,20 +27,17 @@ import { User } from '../shared/index';
     providers: [
         SocketService,
         MessageService,
-        UserService
     ]
 })
 export class LiveChatComponent implements OnInit, OnDestroy {
     private user: User;
     public connectionStatus = 'disconnected';
 
-    public constructor(private socketService: SocketService, private messageService: MessageService, private router: ActivatedRoute) {
+    public constructor(private socketService: SocketService, private messageService: MessageService, private authorizationService: AuthorizationService) {
     }
 
     public ngOnInit() {
-        this.router.data.forEach((data: { user: User }) => {
-            this.user = data.user;
-        });
+        this.user = this.authorizationService.user;
         this.socketService.configure();
         this.socketService.asObservable().subscribe(
             (item) => this.process(item),

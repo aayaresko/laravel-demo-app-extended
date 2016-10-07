@@ -1,4 +1,5 @@
-import { Account, AccountProfile } from '../account/index';
+import { Account } from '../account/account';
+import { AccountProfile } from '../account/account-profile';
 import { appConfigData } from '../app-config-data';
 
 export class User {

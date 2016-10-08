@@ -9,7 +9,6 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
-import { appConfigData } from '../app-config-data';
 
 @Injectable()
 export class AuthorizationGuard implements CanActivate, CanLoad, CanActivateChild {
@@ -30,7 +29,12 @@ export class AuthorizationGuard implements CanActivate, CanLoad, CanActivateChil
     }
 
     private runCheck(): boolean {
-        let accessToken = appConfigData.csrf_token;
-        return (!accessToken || accessToken === '') ? false : true;
+        let accessToken = Cookie.get('access_token');
+        if (!accessToken || accessToken === '') {
+            this.router.navigate(['login']);
+            return false;
+        } else {
+            return true;
+        }
     }
 }

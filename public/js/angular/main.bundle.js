@@ -47875,9 +47875,9 @@ var UserResolveService = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_service__ = __webpack_require__(564);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_service__ = __webpack_require__(357);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_message_service__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_authorization_service__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__message__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_message__ = __webpack_require__(229);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return LiveChatComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -47921,7 +47921,7 @@ var LiveChatComponent = (function () {
         switch (action) {
             case 'connected':
                 data = {
-                    message: new __WEBPACK_IMPORTED_MODULE_4__message__["a" /* Message */](' has connected', this.user.account.id)
+                    message: new __WEBPACK_IMPORTED_MODULE_4__shared_message__["a" /* Message */](' has connected', this.user.account.id)
                 };
                 this.socketService.send(data, 'notification');
                 this.socketService.latest(this.messageService.getIndex());
@@ -47929,7 +47929,7 @@ var LiveChatComponent = (function () {
             case 'chat-message':
             case 'system-message':
                 data = item.data.message;
-                var message = new __WEBPACK_IMPORTED_MODULE_4__message__["a" /* Message */](data.content, data.author_id, data.author, data.created_at, action, data.id);
+                var message = new __WEBPACK_IMPORTED_MODULE_4__shared_message__["a" /* Message */](data.content, data.author_id, data.author, data.created_at, action, data.id);
                 this.messageService.cache(message);
                 break;
         }
@@ -47956,10 +47956,10 @@ var LiveChatComponent = (function () {
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_1__socket_service__["a" /* SocketService */],
-                __WEBPACK_IMPORTED_MODULE_2__message_service__["a" /* MessageService */],
+                __WEBPACK_IMPORTED_MODULE_2__shared_message_service__["a" /* MessageService */],
             ]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__socket_service__["a" /* SocketService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__socket_service__["a" /* SocketService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__message_service__["a" /* MessageService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__core_authorization_service__["a" /* AuthorizationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__core_authorization_service__["a" /* AuthorizationService */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__socket_service__["a" /* SocketService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__socket_service__["a" /* SocketService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__shared_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__shared_message_service__["a" /* MessageService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__core_authorization_service__["a" /* AuthorizationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__core_authorization_service__["a" /* AuthorizationService */]) === 'function' && _c) || Object])
     ], LiveChatComponent);
     return LiveChatComponent;
     var _a, _b, _c;
@@ -65693,9 +65693,9 @@ var CoreModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_shared_module__ = __webpack_require__(566);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__live_chat_component__ = __webpack_require__(356);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_component__ = __webpack_require__(562);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__message_form_component__ = __webpack_require__(561);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__messages_list_component__ = __webpack_require__(563);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_detail_message_detail_component__ = __webpack_require__(561);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_message_form_component__ = __webpack_require__(563);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__message_list_messages_list_component__ = __webpack_require__(562);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__window_resize_directive__ = __webpack_require__(567);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return LiveChatModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -65724,9 +65724,9 @@ var LiveChatModule = (function () {
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__live_chat_component__["a" /* LiveChatComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__message_component__["a" /* MessageComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__message_form_component__["a" /* MessageFormComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__messages_list_component__["a" /* MessagesListComponent */],
+                __WEBPACK_IMPORTED_MODULE_3__message_detail_message_detail_component__["a" /* MessageDetailComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__shared_message_form_component__["a" /* MessageFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__message_list_messages_list_component__["a" /* MessagesListComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__window_resize_directive__["a" /* WindowResizeDirective */],
             ]
         }), 
@@ -65738,6 +65738,100 @@ var LiveChatModule = (function () {
 
 /***/ },
 /* 561 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_message__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_user__ = __webpack_require__(228);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return MessageDetailComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MessageDetailComponent = (function () {
+    function MessageDetailComponent() {
+    }
+    MessageDetailComponent.prototype.ngOnInit = function () {
+        if (this.message && this.message.author_id) {
+            this.author = new __WEBPACK_IMPORTED_MODULE_2__core_user__["a" /* User */](this.message.author);
+        }
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Input */])(), 
+        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_message__["a" /* Message */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_message__["a" /* Message */]) === 'function' && _a) || Object)
+    ], MessageDetailComponent.prototype, "message", void 0);
+    MessageDetailComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Component */])({
+            selector: 'app-live-chat-message-detail',
+            template: __webpack_require__(738),
+        }), 
+        __metadata('design:paramtypes', [])
+    ], MessageDetailComponent);
+    return MessageDetailComponent;
+    var _a;
+}());
+
+
+/***/ },
+/* 562 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_message_service__ = __webpack_require__(357);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return MessagesListComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var MessagesListComponent = (function () {
+    function MessagesListComponent(messageService) {
+        this.messageService = messageService;
+        this.messages = [];
+    }
+    MessagesListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.messageService.all().then(function (messages) { return _this.messages = messages; });
+    };
+    MessagesListComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Component */])({
+            selector: 'app-live-chat-messages-list',
+            template: __webpack_require__(739),
+            animations: [
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_33" /* trigger */])('added', [
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_34" /* transition */])('void => *', [
+                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_35" /* style */])({ opacity: 0 }),
+                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_36" /* animate */])('300ms, 600ms ease', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_35" /* style */])({ opacity: 1 }))
+                    ]),
+                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_34" /* transition */])('* => void', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_35" /* style */])({ opacity: 0 }))
+                ])
+            ]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_message_service__["a" /* MessageService */]) === 'function' && _a) || Object])
+    ], MessagesListComponent);
+    return MessagesListComponent;
+    var _a;
+}());
+
+
+/***/ },
+/* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65786,105 +65880,11 @@ var MessageFormComponent = (function () {
     MessageFormComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Component */])({
             selector: 'app-live-chat-message-form',
-            template: __webpack_require__(738),
+            template: __webpack_require__(740),
         }), 
         __metadata('design:paramtypes', [])
     ], MessageFormComponent);
     return MessageFormComponent;
-    var _a;
-}());
-
-
-/***/ },
-/* 562 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__message__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_user__ = __webpack_require__(228);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return MessageComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var MessageComponent = (function () {
-    function MessageComponent() {
-    }
-    MessageComponent.prototype.ngOnInit = function () {
-        if (this.message && this.message.author_id) {
-            this.author = new __WEBPACK_IMPORTED_MODULE_2__core_user__["a" /* User */](this.message.author);
-        }
-    };
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Input */])(), 
-        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__message__["a" /* Message */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__message__["a" /* Message */]) === 'function' && _a) || Object)
-    ], MessageComponent.prototype, "message", void 0);
-    MessageComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Component */])({
-            selector: 'app-live-chat-message',
-            template: __webpack_require__(739),
-        }), 
-        __metadata('design:paramtypes', [])
-    ], MessageComponent);
-    return MessageComponent;
-    var _a;
-}());
-
-
-/***/ },
-/* 563 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__message_service__ = __webpack_require__(357);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return MessagesListComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var MessagesListComponent = (function () {
-    function MessagesListComponent(messageService) {
-        this.messageService = messageService;
-        this.messages = [];
-    }
-    MessagesListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.messageService.all().then(function (messages) { return _this.messages = messages; });
-    };
-    MessagesListComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Component */])({
-            selector: 'app-live-chat-messages-list',
-            template: __webpack_require__(740),
-            animations: [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_33" /* trigger */])('added', [
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_34" /* transition */])('void => *', [
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_35" /* style */])({ opacity: 0 }),
-                        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_36" /* animate */])('300ms, 600ms ease', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_35" /* style */])({ opacity: 1 }))
-                    ]),
-                    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_34" /* transition */])('* => void', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_35" /* style */])({ opacity: 0 }))
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__message_service__["a" /* MessageService */]) === 'function' && _a) || Object])
-    ], MessagesListComponent);
-    return MessagesListComponent;
     var _a;
 }());
 
@@ -71338,19 +71338,19 @@ module.exports = "<div class=\"row\">\n    <div class=\"col-md-12\">\n        <d
 /* 738 */
 /***/ function(module, exports) {
 
-module.exports = "<p>You are logged in as: <strong>{{author.getFullName()}}</strong></p>\n<form class=\"form-horizontal\" [formGroup]=\"mainForm\" (ngSubmit)=\"onSubmit()\">\n    <div class=\"row\">\n        <div class=\"col-md-11\">\n            <textarea id=\"content\" name=\"content\" placeholder=\"Yor message text\" class=\"form-control\" formControlName=\"content\" required></textarea>\n        </div>\n        <div class=\"col-md-1\">\n            <input class=\"btn btn-primary\" value=\"Send\" type=\"submit\" [disabled]=\"!mainForm.valid\">\n        </div>\n    </div>\n</form>";
+module.exports = "<template [ngIf]=\"author\">\n    <div [ngSwitch]=\"message.type\">\n        <template [ngSwitchCase]=\"'system-message'\">\n            <div class=\"col-md-10\">\n                <p>\n                    <span class=\"text-primary\">system:</span>\n                    <span class=\"text-muted\">{{author.getFullName()}} {{message.content}}</span>\n                </p>\n            </div>\n            <div class=\"col-md-2\">\n                <p class=\"text-muted pull-right\">Today at {{message.created_at | date:'HH:mm'}}</p>\n            </div>\n        </template>\n        <template ngSwitchDefault>\n            <div class=\"col-md-1\">\n                <a href=\"{{author.getDetailUrl()}}\" target=\"_blank\" class=\"thumbnail\">\n                    <img src=\"{{author.getAvatarUrl()}}\" alt=\"{{author.getFullName()}}\" class=\"img-responsive\">\n                </a>\n            </div>\n            <div class=\"col-md-9\">\n                <p>\n                    <strong>\n                        <a href=\"{{author.getDetailUrl()}}\" target=\"_blank\">{{author.getFullName()}}</a>\n                    </strong>\n                </p>\n                <div>{{message.content}}</div>\n            </div>\n            <div class=\"col-md-2\">\n                <p class=\"text-muted pull-right\">Today at {{message.created_at | date:'HH:mm'}}</p>\n            </div>\n        </template>\n    </div>\n</template>\n";
 
 /***/ },
 /* 739 */
 /***/ function(module, exports) {
 
-module.exports = "<template [ngIf]=\"author\">\n    <div [ngSwitch]=\"message.type\">\n        <template [ngSwitchCase]=\"'system-message'\">\n            <div class=\"col-md-10\">\n                <p>\n                    <span class=\"text-primary\">system:</span>\n                    <span class=\"text-muted\">{{author.getFullName()}} {{message.content}}</span>\n                </p>\n            </div>\n            <div class=\"col-md-2\">\n                <p class=\"text-muted pull-right\">Today at {{message.created_at | date:'HH:mm'}}</p>\n            </div>\n        </template>\n        <template ngSwitchDefault>\n            <div class=\"col-md-1\">\n                <a href=\"{{author.getDetailUrl()}}\" target=\"_blank\" class=\"thumbnail\">\n                    <img src=\"{{author.getAvatarUrl()}}\" alt=\"{{author.getFullName()}}\" class=\"img-responsive\">\n                </a>\n            </div>\n            <div class=\"col-md-9\">\n                <p>\n                    <strong>\n                        <a href=\"{{author.getDetailUrl()}}\" target=\"_blank\">{{author.getFullName()}}</a>\n                    </strong>\n                </p>\n                <div>{{message.content}}</div>\n            </div>\n            <div class=\"col-md-2\">\n                <p class=\"text-muted pull-right\">Today at {{message.created_at | date:'HH:mm'}}</p>\n            </div>\n        </template>\n    </div>\n</template>\n";
+module.exports = "<div class=\"list-group\">\n    <div class=\"row list-group-item\" *ngFor=\"let message of messages\" @added>\n        <app-live-chat-message-detail [message]=\"message\"></app-live-chat-message-detail>\n    </div>\n</div>";
 
 /***/ },
 /* 740 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"list-group\">\n    <div class=\"row list-group-item\" *ngFor=\"let message of messages\" @added>\n        <app-live-chat-message [message]=\"message\"></app-live-chat-message>\n    </div>\n</div>";
+module.exports = "<p>You are logged in as: <strong>{{author.getFullName()}}</strong></p>\n<form class=\"form-horizontal\" [formGroup]=\"mainForm\" (ngSubmit)=\"onSubmit()\">\n    <div class=\"row\">\n        <div class=\"col-md-11\">\n            <textarea id=\"content\" name=\"content\" placeholder=\"Yor message text\" class=\"form-control\" formControlName=\"content\" required></textarea>\n        </div>\n        <div class=\"col-md-1\">\n            <input class=\"btn btn-primary\" value=\"Send\" type=\"submit\" [disabled]=\"!mainForm.valid\">\n        </div>\n    </div>\n</form>";
 
 /***/ },
 /* 741 */

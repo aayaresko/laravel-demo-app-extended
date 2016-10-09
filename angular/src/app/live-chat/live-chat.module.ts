@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { LiveChatComponent } from './live-chat.component';
-import { MessageComponent } from './message.component';
-import { MessageFormComponent } from './message-form.component';
-import { MessagesListComponent } from './messages-list.component';
+import { MessageDetailComponent } from './message-detail/message-detail.component';
+import { MessageFormComponent } from './shared/message-form.component';
+import { MessagesListComponent } from './message-list/messages-list.component';
 import { WindowResizeDirective } from '../window-resize.directive';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { WindowResizeDirective } from '../window-resize.directive';
     ],
     declarations: [
         LiveChatComponent,
-        MessageComponent,
+        MessageDetailComponent,
         MessageFormComponent,
         MessagesListComponent,
         WindowResizeDirective,

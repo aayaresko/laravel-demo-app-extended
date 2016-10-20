@@ -8,7 +8,7 @@
  * @author Andrey Yaresko <aayaresko@gmail.com>
  */
 
-namespace app\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
 

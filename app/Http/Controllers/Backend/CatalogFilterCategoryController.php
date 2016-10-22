@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Components\Facades\TablesFacade;
+use aayaresko\table\TablesFacade;
 use App\Http\Controllers\Controller;
 use App\Models\Entities\CatalogFilterCategory;
 use Illuminate\Http\Request;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Components\Facades\TablesFacade;
+use aayaresko\table\TablesFacade;
 use App\Components\Facades\UserAccountFacade;
 use App\Http\Controllers\Controller;
 use App\Models\Entities\Account;

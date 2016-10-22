@@ -10,7 +10,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Components\Facades\TablesFacade;
+use aayaresko\table\TablesFacade;
 use App\Http\Controllers\Controller;
 use App\Models\Entities\CatalogCategory;
 use Illuminate\Http\Request;

@@ -19,7 +19,8 @@
         "socialiteproviders/vkontakte": "^2.0",
         "aayaresko/laravel-language": "dev-master",
         "laravel/passport": "^1.0",
-        "barryvdh/laravel-cors": "^0.8.2"
+        "barryvdh/laravel-cors": "^0.8.2",
+        "aayaresko/laravel-table": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

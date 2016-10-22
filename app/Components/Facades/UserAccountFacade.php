@@ -19,7 +19,6 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;

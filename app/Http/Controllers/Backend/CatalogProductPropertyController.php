@@ -14,7 +14,17 @@ class CatalogProductPropertyController extends Controller
     public function index()
     {
         $models = CatalogProductProperty::paginate(20);
-        $table = new TablesFacade($models, ['id', 'visible_name', 'value', 'category.visible_name', 'created'], 'backend.catalog-product-property');
+        $table = new TablesFacade(
+            $models,
+            [
+                'content.identifier' => 'id',
+                'content.visible_name_label' => 'visible_name',
+                'catalog.product_property_value_label' => 'value',
+                'category.visible_name_label' => 'category.visible_name',
+                'content.created' => 'created'
+            ],
+            'backend.catalog-product-property'
+        );
         return view('backend.catalog-product-property.index', ['table' => $table]);
     }
 

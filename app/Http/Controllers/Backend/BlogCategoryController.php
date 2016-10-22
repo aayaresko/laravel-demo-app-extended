@@ -20,7 +20,16 @@ class BlogCategoryController extends Controller
     public function index()
     {
         $models = BlogCategory::paginate(20);
-        $table = new TablesFacade($models, ['visible_name', 'alias_name', 'description', 'created'], 'backend.blog-category');
+        $table = new TablesFacade(
+            $models,
+            [
+                'content.visible_name_label' => 'visible_name',
+                'content.alias_name_label' => 'alias_name',
+                'content.description_label' => 'description',
+                'content.created' => 'created'
+            ],
+            'backend.blog-category'
+        );
         return view('backend.blog-category.index', ['table' => $table]);
     }
 

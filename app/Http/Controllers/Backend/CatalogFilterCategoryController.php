@@ -12,7 +12,16 @@ class CatalogFilterCategoryController extends Controller
     public function index()
     {
         $models = CatalogFilterCategory::paginate(12);
-        $table = new TablesFacade($models, ['visible_name', 'alias_name', 'description', 'created'], 'backend.catalog-filter-category');
+        $table = new TablesFacade(
+            $models,
+            [
+                'content.visible_name_label' => 'visible_name',
+                'content.alias_name_label' => 'alias_name',
+                'content.description_label' => 'description',
+                'content.created' => 'created'
+            ],
+            'backend.catalog-filter-category'
+        );
         return view('backend.catalog-filter-category.index', ['table' => $table]);
     }
 

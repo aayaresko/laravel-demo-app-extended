@@ -16,7 +16,15 @@ class CatalogFilterController extends Controller
         $models = CatalogFilter::paginate(20);
         $table = new TablesFacade(
             $models,
-            ['title', 'type', 'leftProperty.value', 'rightProperty.value', 'category.visible_name', 'catalogCategory.visible_name', 'created'],
+            [
+                'filter.title_label' => 'title',
+                'filter.type_label' => 'type',
+                'filter.right_property_label' => 'leftProperty.value',
+                'filter.left_property_label' => 'rightProperty.value',
+                'content.visible_name_label' => 'category.visible_name',
+                'category.visible_name_label' => 'catalogCategory.visible_name',
+                'content.created' => 'created'
+            ],
             'backend.catalog-filter'
         );
         return view('backend.catalog-filter.index', ['table' => $table]);

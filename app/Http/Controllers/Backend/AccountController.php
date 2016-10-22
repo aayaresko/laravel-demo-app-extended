@@ -14,7 +14,16 @@ class AccountController extends Controller
     public function index()
     {
         $models = Account::paginate(6);
-        $table = new TablesFacade($models, ['nickname', 'email', 'profile.full_name', 'created'], 'backend.account');
+        $table = new TablesFacade(
+            $models,
+            [
+                'account.nickname_label' => 'nickname',
+                'account.email_label' => 'email',
+                'account.full_name_label' => 'profile.full_name',
+                'content.created' => 'created'
+            ],
+            'backend.account'
+        );
         return view('backend.account.index', ['table' => $table]);
     }
 

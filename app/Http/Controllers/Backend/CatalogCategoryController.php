@@ -20,7 +20,16 @@ class CatalogCategoryController extends Controller
     public function index()
     {
         $models = CatalogCategory::paginate(12);
-        $table = new TablesFacade($models, ['visible_name', 'alias_name', 'description', 'created'], 'backend.catalog-category');
+        $table = new TablesFacade(
+            $models,
+            [
+                'content.visible_name_label' => 'visible_name',
+                'content.alias_name_label' => 'alias_name',
+                'content.description_label' => 'description',
+                'content.created' => 'created'
+            ],
+            'backend.catalog-category'
+        );
         return view('backend.catalog-category.index', ['table' => $table]);
     }
 
